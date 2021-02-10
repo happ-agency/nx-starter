@@ -1,6 +1,8 @@
-# Test Nx Workspace
+# [Nx](https://nx.dev/) Starter
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
+> [Nx](https://nx.dev/) Starter by [happ]()
 
 1. Install [pnpm](https://www.npmjs.com/package/pnpm) globally: `npm install -g pnpm`
 

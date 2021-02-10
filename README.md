@@ -274,9 +274,8 @@
 	1. `nx.json` for `nx dependenices`
 	2. `workspace.json` for `run|buid settings`
 
-Or you can use one of nx plugins for manage it:
-
-1. For [Web]() check [this]()
-2. For [Angular]() check [this]()
-3. For [NestJS]() check [this]()
-4. For [Angular]() + [NestJS]() check [this]()
+## Related Projects:
+1. [nx-web-starter](https://github.com/happ-agency/nx-web-starter)
+2. [nx-nestjs-starter](https://github.com/happ-agency/nx-nestjs-starter)
+3. [nx-angular-starter](https://github.com/happ-agency/nx-angular-starter)
+4. [nx-angular-nestjs-starter](https://github.com/happ-agency/nx-angular-nestjs-starter)

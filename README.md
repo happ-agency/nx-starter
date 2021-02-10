@@ -268,10 +268,11 @@
 
 ### Next Steps
 
-After this steps you can create `apps` and `libs` and register them in:
-
-1. `nx.json` for `nx dependenices`
-2. `workspace.json` for `run|buid settings`
+1. To create a library run: `npx nx g @nrwl/workspace:lib LIB_NAME`
+	 > 1. `LIB_NAME` - name of the library
+2. To create an app you have to create a default project in app dir and then add it to:
+	1. `nx.json` for `nx dependenices`
+	2. `workspace.json` for `run|buid settings`
 
 Or you can use one of nx plugins for manage it:
 

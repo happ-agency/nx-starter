@@ -279,3 +279,11 @@
 2. [nx-nestjs-starter](https://github.com/happ-agency/nx-nestjs-starter)
 3. [nx-angular-starter](https://github.com/happ-agency/nx-angular-starter)
 4. [nx-angular-nestjs-starter](https://github.com/happ-agency/nx-angular-nestjs-starter)
+
+## Additional Info
+
+> `workspace.json` and `angular.json` is the same. 
+> 
+> In `workspace.json` we use `version: 2` and `targets`, `generators`, `executor` 
+> 
+> In `angular.json` we use `version: 1` and `architect`, `schematics`, `builder`

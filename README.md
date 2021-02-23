@@ -144,13 +144,13 @@
 1. Install [commitlint](https://yarnpkg.com/package/commitlint) only for development: `pnpm i -D @commitlint/{config-conventional,cli}`
 2. Install [@happ/commitlint-config]() only for development: `pnpm i -D @happ/commitlint-config`
 3. Create `.commitlintrc.js` in the root folder with:
-	   <details>
-	 		<summary>.commitlintrc.js</summary>
-
-		 module.exports = {
+	<details>
+		<summary>.commitlintrc.js</summary>
+		
+		module.exports = {
 			"extends": ["@happ/commitlint-config"]
-		 }
-	   </details>
+		}
+	</details>
 
 4. Update `package.json` with:
 

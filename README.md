@@ -1,145 +1,193 @@
-# [Nx](https://nx.dev/) Starter
+# [Nx](https://nx.dev/) starter
 
 > Core setup for the [nx](https://nx.dev/) applications
 
-1. To install a [pnpm](https://www.npmjs.com/package/pnpm) globally run: `npm install -g pnpm`
+## Content
 
-	> pnpm - package manager, which is much faster then npm and yarn
+1. [Pnpm](#pnpm)
+2. [Nx workspace](#nx-workspaces)
+3. [Npm check](#npm-check)
+4. [Force using pnpm](#force-using-pnpm)
+5. [Git](#git)
+6. [Git flow](#git-flow)
+6. [Husky](#husky)
+7. [Commitlint](#commitlint)
+7. [Commitizen](#commitizen)
+7. [Conventional changelog](#conventional-changelog-cli)
+7. [Eslint](#eslint)
+7. [Prettier](#prettier)
+7. [Stylelint](#stylelint)
+7. [Editor config](#editor-config)
 
-2. To install a [nx](https://www.npmjs.com/package/nx) globally run: `pnpm install -g nx`
+## Pnpm
+1. Install a [pnpm](https://www.npmjs.com/package/pnpm) globally: `npm i -g pnpm`
 
-	> nx - cli for use nx features via terminal
-	>
-	> use `sudo pnpm install -g nx` if you have access errors
+	> [pnpm](https://www.npmjs.com/package/pnpm) - package manager, which is much faster then npm and yarn
 
-3. To create a [nx workspace](https://nx.dev/) run: `pnpx create-nx-workspace WORKSPACE_NAME --preset=empty --no-nxCloud --package-manager=pnpm --defaultBase=main`
+## Nx Workspaces
 
+1. Create a [nx workspace](https://nx.dev/): `pnpx create-nx-workspace WORKSPACE_NAME --preset=empty --no-nxCloud --package-manager=pnpm --defaultBase=main`
+
+	> [pnpx](https://pnpm.js.org/en/pnpx-cli) - pnpm package runner
+	
 	> 1. `WORKSPACE_NAME` - name of workspace
 	> 2. `--preset=empty` - preset to use
 	> 3. `--nxCloud` - use nx cloud or not
 	> 4. `--package-manager=pnpm` - default package manager
 	> 5. `--defaultBase=main` - default git branch
 
-4. Force using [pnpm](https://pnpm.js.org/en/):
+## Npm check
+1. Install a [npm-check](https://www.npmjs.com/package/npm-check) only for development: `pnpm i -D npm-check`
 
-	1. Add `.npmrc` in the root folder with:
+	> [npm-check](https://www.npmjs.com/package/npm-check) - package that check for outdated, incorrect, and unused dependencies.
 
-		```
-		engine-strict = true
-		```
+2. Update `package.json` with:
 
-	2. Add to the `package.json`:
-
-		```
+	```
+	{
 		...
-		"license": "...",
-		"engines": {
-			"yarn": "please-use-pnpm",
-			"npm": "please-use-pnpm",
-			"pnmp": ">= 15.4.3"
-		},
-		"scripts": { ... }
+		"scripts": {
+			...
+			"check-packages": "npm-check",
+			"update-packages": "npm-check -y"
+		}
 		...
-		```
+	}
+	```  
 
-	> Force usign `pnpm` throw `please-use-pnpm` error on `npm` or `yarn` use
+## Force using pnpm
 
-5. Setup [Git](https://git-scm.com/):
+1. Create `.npmrc` in the root folder with:
 
-	1. To add origin run: `git remote add origin https://github.com/happ-agency/nx-starter.git`
-	2. To set main branch run: `git branch -M main`
-	3. To push on git run: `git push -u origin main`
+	```
+	engine-strict = true
+	```
+
+2. Update `package.json` with:
+
+	```
+	...
+	"license": "...",
+	"engines": {
+		"yarn": "please-use-pnpm",
+		"npm": "please-use-pnpm",
+		"pnmp": ">= 15.4.3"
+	},
+	"scripts": { ... }
+	...
+	```
+
+> Force usign [pnpm](https://www.npmjs.com/package/pnpm) throw `please-use-pnpm` error on [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) use
+
+## Git
+
+> [Git](https://git-scm.com/)
+
+1. Add origin: `git remote add origin https://github.com/happ-agency/nx-starter.git`
+2. Set main branch: `git branch -M main`
+3. Push branch: `git push -u origin main`
 	
-6. Setup [GitFlow](https://danielkummer.github.io/git-flow-cheatsheet/index.ru_RU.html):
+## Git flow
 
-	1. For production run: `git branch -M main`
-	2. For develop run: `git checkout -b develop` (from `main`)
-	3. For feature run: `git checkout -b feature/xxx` (from develop)
-	4. For fix run: `git checkout -b fix/xxx` (from develop)
-	5. For release rus: `git checkout -b release/xxx` (from develop)
-	6. For hotfix run: `git checkout -b hotfix/xxx` (from main)
+> [Git flow](https://danielkummer.github.io/git-flow-cheatsheet/index.ru_RU.html)
+ 
+1. Create `main` branch: `git branch -M main`
+2. Create `develop` branch fron `main`: `git checkout -b develop`
+3. Create `feature` branch from `develop`: `git checkout -b feature/xxx`
+4. Create `fix` brabch from `develop`: `git checkout -b fix/xxx` 
+5. Create `release` brabch from `develop`: `git checkout -b release/xxx`
+6. Create `hotfix` brabch from `develop`: `git checkout -b hotfix/xxx` 
 	
-	> 1. We work in the `develop` branch.
-	> 2. When we start work with the `feature` or `fix`, we create `feature/xxx` or `fix/xxx` from the `develop`.
-	> 3. After finish the work we create pull request from the `feat/xxx` or `fix/xxx` to the `develop`.
-	> 4. For the relase create `release/xxx` from the `develop`.
-	> 5. For the publish create pull request from the `release/xxx` to the `main`.
-	> 6. After the publish rebase `main` from the `dev` and rebase `dev` from the `feature/xxx` or `fix/xxx`.
-	> 7. `Hotfix` creates from the `main` and create pull request to the `main` after the finish
-	> 8. After each changes in the `main` or `develop` we do rebase from connected branches. rebase `main` from `develop`. rebase `develop` from `features` or `fixes`
+> 1. We work in the `develop` branch.
+> 2. When we start work with the `feature` or `fix`, we create `feature/xxx` or `fix/xxx` from the `develop`.
+> 3. After finish the work we create pull request from the `feat/xxx` or `fix/xxx` to the `develop`.
+> 4. For the relase create `release/xxx` from the `develop`.
+> 5. For the publish create pull request from the `release/xxx` to the `main`.
+> 6. After the publish rebase `main` from the `dev` and rebase `dev` from the `feature/xxx` or `fix/xxx`.
+> 7. `Hotfix` creates from the `main` and create pull request to the `main` after the finish
+> 8. After each changes in the `main` or `develop` we do rebase from connected branches. rebase `main` from `develop`. rebase `develop` from `features` or `fixes`
 
-7. Setup [Husky](https://www.npmjs.com/package/husky):
+## Husky
 
-	1. To install `husky` (only for dev) run: `pnpm i -D husky`
-	2. Add to the `package.json`:
-		```
-		{
-			...
-			"scripts": { ... },
-			"husky": {
-				"hooks": {
-				 	"pre-commit": "nx lint"
-				}
-			},
-			"private": "...",
-			...
-		}
-		```
+> [Husky](https://www.npmjs.com/package/husky)
 
-8.  Setup [Commitlint](https://yarnpkg.com/package/commitlint):
-
-	1. To install [commitlint](https://yarnpkg.com/package/commitlint) (only for dev) run: `pnpm i -D @commitlint/{config-conventional,cli}`
-	2. To install [@happ/commitlint-config]() (only for dev) run: `pnpm i -D @happ/commitlint-config`
-	3. Add `.commitlintrc.js` in the root folder with:
-	
-		```
-		module.exports = {
-			"extends": ["@happ/commitlint-config"]
-		}
-		```
-
-	4. Add to the `package.json`:
-	
-		```
+1. Install [husky](https://www.npmjs.com/package/husky) only for development: `pnpm i -D husky`
+2. Update `package.json` with:
+	```
+	{
+		...
+		"scripts": { ... },
 		"husky": {
 			"hooks": {
-				...
-				"pre-commit": "nx lint",
-				"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-				...
+				"pre-commit": "nx lint"
 			}
+		},
+		"private": "...",
+		...
+	}
+	```
+
+## Commitlint
+
+> [Commitlint](https://yarnpkg.com/package/commitlint)
+
+1. Install [commitlint](https://yarnpkg.com/package/commitlint) only for development: `pnpm i -D @commitlint/{config-conventional,cli}`
+2. Install [@happ/commitlint-config]() only for development: `pnpm i -D @happ/commitlint-config`
+3. Create `.commitlintrc.js` in the root folder with:
+
+	```
+	module.exports = {
+		"extends": ["@happ/commitlint-config"]
+	}
+	```
+
+4. Update `package.json` with:
+
+	```
+	"husky": {
+		"hooks": {
+			...
+			"pre-commit": "nx lint",
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
 		}
-		```
+	}
+	```
 
-	> Commit have to be like `feat: add auth service`, `fix: remove wrong validation`
-	>
-	> You can find all availale types [here](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional)
+> Commit have to be like `feat: add auth service`, `fix: remove wrong validation`
+>
+> You can find all availale types [here](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional)
 
-9.  Setup [Commitizen](https://yarnpkg.com/package/commitizen) and [cz-format-extension](https://github.com/tyankatsu0105/cz-format-extension):
+## Commitizen
 
-	1. To install [commitizen](Commitizen) (only for dev) run: `pnpm i -D commitizen cz-format-extension`
-	2. To install [@happ/commitizen-config]() config (only for dev) run: `pnpm i -D @happ/commitizen-config`
-	3. To make your repo commitizen-friendly run: `commitizen init cz-conventional-changelog --save-dev --save-exact`
-	4. Create `.czrc` with:
+> [Commitizen](https://www.npmjs.com/package/commitizen)
+> 
+> [cz-format-extension](https://www.npmjs.com/package/cz-format-extension) - tool for customize commitizent questions
 
-		```
-		{
-			"path": "cz-format-extension"
-		}
-		```
+1. Install [commitizen](https://www.npmjs.com/package/commitizen) only for development: `pnpm i -D commitizen`
+2. Install [cz-format-extension](https://www.npmjs.com/package/cz-format-extension) only for development: `pnpm i -D cz-format-extension`
+3. Install [@happ/commitizen-config]() config only for development: `pnpm i -D @happ/commitizen-config`
+	 > Install it together: `pnpm i -D commitizen cz-format-extension @happ/commitizen-config`
+4. Make your repo commitizen-friendly: `commitizen init cz-conventional-changelog --save-dev --save-exact`
+5. Create `.czrc` with:
 
-	5. Create `.czferc.js` with:
+	```
+	{
+		"path": "cz-format-extension"
+	}
+	```
 
-		```
-		module.exports = {
-			extends: ['@happ/commitizen-config']
-		};
-		```
+6. Create `.czferc.js` with:
 
-	6. Add to the `package.json`:
-	
-		```
-		{
+	```
+	module.exports = {
+		extends: ['@happ/commitizen-config']
+	};
+	```
+
+7. Update `package.json` with:
+
+	```
+	{
 		...
 		"scripts": {
 			...
@@ -147,126 +195,144 @@
 			"git-commit": "cz",
 			"git-push": "git push",
 			"git": "pnpm run git-add && pnpm run git-commit && pnpm run git-push"
-			...
 		}
 		...
-		}
-		```
+	}
+	```
 
-		> Use `cz-format-extension` for customize commitizent questions
+## Conventional changelog cli
 
-10. Setup [Conventional Changelog](https://yarnpkg.com/package/conventional-changelog):
+> [Conventional changelog cli](https://www.npmjs.com/package/conventional-changelog-cli)
 
-	1. To install [conventional changelog](https://yarnpkg.com/package/conventional-changelog) (only for dev) run: `pnpm i -D conventional-changelog-cli`
-	2. To init changelog run: `conventional-changelog -p angular -i CHANGELOG.md -s -r 0`
-	3. Add to the `package.json`:
+1. Install [conventional changelog cli](https://www.npmjs.com/package/conventional-changelog-cli) only for development: `pnpm i -D conventional-changelog-cli`
+2. Init changelog: `conventional-changelog -p angular -i CHANGELOG.md -s -r 0`
+3. Update `package.json` with:
 
-		```
-		{
+	```
+	{
+		...
+		"scripts": {
 			...
-			"scripts": {
-				...
-				"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
-				"version": "pnpm run changelog"
-				...
+			"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+			"version": "pnpm run changelog"
+		}
+		...
+	}
+	```
+
+	> Use `pnpm version [major|minor|patch]` to change your project's version and generate changelog
+	>
+	> `version` script runs automatically on `pnpm version major`
+
+## Eslint
+
+> [Eslint](https://www.npmjs.com/package/eslint)
+
+1. Install [eslint](https://www.npmjs.com/package/eslint) only for development: `pnpm i -D eslint`
+2. Install [@happ/eslint-config]() only for development: `pnpm i -D @happ/eslint-config`
+3. Install [@happ/eslint-config-typescript]() only for development: `pnpm i -D @happ/eslint-config-typescript`
+4. Install [@happ/eslint-config-jest]() only for development: `pnpm i -D @happ/eslint-jest`
+5. Install [@happ/eslint-config-angular]() only for development: `pnpm i -D @happ/eslint-config-angular`
+6. Install [@happ/eslint-config-angular-template]() only for development: `pnpm i -D @happ/eslint-config-angular-template`
+7. Install [@happ/eslint-config-json]() only for development: `pnpm i -D @happ/eslint-config-json`
+8. Install [@happ/eslint-config-markdown]() only for development: `pnpm i -D @happ/eslint-config-markdown`
+	 > Install it together: `pnpm i -D @happ/eslint-config @happ/eslint-config-typescript @happ/eslint-config-jest @happ/eslint-config-angular @happ/eslint-config-angular-template @happ/eslint-config-json @happ/eslint-config-markdown`
+9. Create `.eslintrc.js` with:
+
+	```
+	module.exports = {
+		"overrides": [
+			{
+				"files": ["*.js", "*.ts"],
+				"extends": ["@happ/eslint-config"]
+			},
+			{
+				"files": ["*.ts"],
+				"extends": ["@happ/eslint-config-typescript"]
+			},
+			{
+				"files": ["*.spec.js", "*.spec.ts"],
+				"extends": ["@happ/eslint-config-jest"]
+			},
+			{
+				"files": ["ANGULAR_DIRECTORY/*.ts"],
+				"extends": ["@happ/eslint-config-angular"]
+			},
+			{
+				"files": ["ANGULAR_DIRECTORY/*.html"],
+				"extends": ["@happ/eslint-config-angular-template"]
+			},
+			{
+				"files": ["*.json"],
+				"extends": ["@happ/eslint-config-json"]
+			},
+			{
+				"files": ["*.md"],
+				"extends": ["@happ/eslint-config-markdown"]
 			}
-			...
-		}
-		```
+		]
+	}
+	```
 
-    > Use `pnpm version [major|minor|patch]` to change your project's version and generate changelog
-    >
-    > `version` script runs automatically on `pnpm version major`
+## Prettier
 
-11. Setup [Eslint](https://eslint.org/):
+> [Prettier](https://www.npmjs.com/package/prettier)
 
-	1. To install [eslint](https://eslint.org/) (only for dev) run: `pnpm i -D eslint`
-	2. To install [@happ/eslint-config]() (only for dev) run: `pnpm i -D @happ/eslint-config`
-	3. To install [@happ/eslint-config-typescript]() (only for dev) run: `pnpm i -D @happ/eslint-config-typescript`
-	4. To install [@happ/eslint-config-jest]() (only for dev) run: `pnpm i -D @happ/eslint-jest`
-	5. To install [@happ/eslint-config-angular]() (only for dev) run: `pnpm i -D @happ/eslint-config-angular`
-	6. To install [@happ/eslint-config-angular-template]() (only for dev) run: `pnpm i -D @happ/eslint-config-angular-template`
-	7. To install [@happ/eslint-config-json]() (only for dev) run: `pnpm i -D @happ/eslint-config-json`
-	8. To install [@happ/eslint-config-markdown]() (only for dev) run: `pnpm i -D @happ/eslint-config-markdown`
-		 > To install it together run: `pnpm i -D @happ/eslint-config @happ/eslint-config-typescript @happ/eslint-config-jest @happ/eslint-config-angular @happ/eslint-config-angular-template @happ/eslint-config-json @happ/eslint-config-markdown`
-	9. Create `.eslintrc.js` with:
+1. Install [prettier](https://www.npmjs.com/package/prettier): `pnpm i -D prettier`
+2. Install [@happ/prettier-config]() only for development: `pnpm i -D @happ/prettier-config`
+3. Create `.prettierrc.js` with:
 
-		```
-		module.exports = {
-			"overrides": [
-				{
-					"files": ["*.js", "*.ts"],
-					"extends": ["@happ/eslint-config"]
-				},
-				{
-					"files": ["*.ts"],
-					"extends": ["@happ/eslint-config-typescript"]
-				},
-				{
-					"files": ["*.spec.js", "*.spec.ts"],
-					"extends": ["@happ/eslint-config-jest"]
-				},
-				{
-					"files": ["ANGULAR_DIRECTORY/*.ts"],
-					"extends": ["@happ/eslint-config-angular"]
-				},
-				{
-					"files": ["ANGULAR_DIRECTORY/*.html"],
-					"extends": ["@happ/eslint-config-angular-template"]
-				},
-				{
-					"files": ["*.json"],
-					"extends": ["@happ/eslint-config-json"]
-				},
-				{
-					"files": ["*.md"],
-					"extends": ["@happ/eslint-config-markdown"]
-				}
-			]
-		}
-		```
+	```
+	module.exports = {
+		extends: ["@happ/prettier-config"]
+	}
+	```
 
-12. Setup [Prettier](https://prettier.io/):
+## Stylelint
 
-	1. To install [prettier](https://prettier.io/) run: `pnpm i -D prettier`
-	2. To install [@happ/prettier-config] (only for dev) run: `pnpm i -D @happ/prettier-config`
-	3. Create `.prettierrc.js` with:
+> [Stylelint](https://www.npmjs.com/package/stylelint)
+
+1. Install [stylelint](https://www.npmjs.com/package/stylelint) only for development: `pnpm i -D stylelint`
+2. Install [@happ/stylelint-config]() only for development: `pnpm i -D @happ/stylelint-config`
+3. Create `.stylelintrc.js` with:
+
+	```
+	module.exports = {
+		extends: ["@happ/stylelint-config"]
+	}
+	```
+
+## Editor config
+
+> [Editor config](https://editorconfig.org/) 
+
+1. Create `.editorconfig` with:
+
+	```
+	root = true
 	
-		```
-		module.exports = {
-			extends: ["@happ/prettier-config"]
-		}
-		```
+	[*]
+	end_of_line = lf
+	insert_final_newline = true
+	indent_style = tab
+	indent_size = 2
+	```
 
-13. Setup [Stylelint](https://stylelint.io/):
+> If you are using VS Code you have also install [plugin](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
-	1. To install [stylelint](https://stylelint.io/) (only for dev) run: `pnpm i -D stylelint`
-	2. To install [@happ/stylelint-config] (only for dev) run: `pnpm i -D @happ/stylelint-config`
-	3. Create `.stylelintrc.js` with:
-	
-		```
-		module.exports = {
-			extends: ["@happ/stylelint-config"]
-		}
-		```
 
-14. Setup [EditorConfig](https://editorconfig.org/):
+## Used libraries
+1. [Npm-check](https://www.npmjs.com/package/npm-check)
+2. [Husky](https://www.npmjs.com/package/husky)
+3. [Commitlint](https://yarnpkg.com/package/commitlint)
+4. [Commitizen](https://www.npmjs.com/package/commitizen)
+5. [Cz-format-extension](https://www.npmjs.com/package/cz-format-extension)
+6. [Conventional changelog cli](https://www.npmjs.com/package/conventional-changelog-cli)
+7. [Eslint](https://www.npmjs.com/package/eslint)
+8. [Prettier](https://www.npmjs.com/package/prettier)
+9. [Stylelint](https://www.npmjs.com/package/stylelint)
 
-	1. Create `.editorconfig` with:
-
-		```
-		root = true
-		
-		[*]
-		end_of_line = lf
-		insert_final_newline = true
-		indent_style = tab
-		indent_size = 2
-		```
-
-	> If you are using VS Code you have also install [plugin](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-
-### Next Steps
+## Next steps
 
 1. To create a library run: `npx nx g @nrwl/workspace:lib LIB_NAME`
 	 > 1. `LIB_NAME` - name of the library
@@ -274,13 +340,13 @@
 	1. `nx.json` for `nx dependenices`
 	2. `workspace.json` for `run|buid settings`
 
-## Related Projects:
+## Related projects:
 1. [nx-web-starter](https://github.com/happ-agency/nx-web-starter)
 2. [nx-nestjs-starter](https://github.com/happ-agency/nx-nestjs-starter)
 3. [nx-angular-starter](https://github.com/happ-agency/nx-angular-starter)
 4. [nx-angular-nestjs-starter](https://github.com/happ-agency/nx-angular-nestjs-starter)
 
-## Additional Info
+## Additional info
 
 > `workspace.json` and `angular.json` is the same. 
 > 

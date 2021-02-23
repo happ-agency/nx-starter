@@ -43,39 +43,47 @@
 
 2. Update `package.json` with:
 
-	```
-	{
-		...
-		"scripts": {
+	 <details>
+	 	<summary>package.json</summary>
+
+		{
 			...
-			"check-packages": "npm-check",
-			"update-packages": "npm-check -y"
+				"scripts": {
+					...
+				 	"check-packages": "npm-check",
+				 	"update-packages": "npm-check -y"
+				}
+			...
 		}
-		...
-	}
-	```  
+	 </details>
 
 ## Force using pnpm
 
 1. Create `.npmrc` in the root folder with:
+	 
+	<details>
+		<summary>.npmrc</summary>
 
-	```
-	engine-strict = true
-	```
+		engine-strict = true
+	</details>
 
 2. Update `package.json` with:
 
-	```
-	...
-	"license": "...",
-	"engines": {
-		"yarn": "please-use-pnpm",
-		"npm": "please-use-pnpm",
-		"pnmp": ">= 15.4.3"
-	},
-	"scripts": { ... }
-	...
-	```
+	 <details>
+	 	<summary>package.json</summary>
+
+		{
+			...
+			"license": "...",
+			"engines": {
+				 "yarn": "please-use-pnpm",
+				 "npm": "please-use-pnpm",
+				 "pnmp": ">= 15.4.3"
+			},
+			"scripts": { ... }
+			...	
+		}
+	 </details>
 
 > Force usign [pnpm](https://www.npmjs.com/package/pnpm) throw `please-use-pnpm` error on [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) use
 
@@ -113,19 +121,21 @@
 
 1. Install [husky](https://www.npmjs.com/package/husky) only for development: `pnpm i -D husky`
 2. Update `package.json` with:
-	```
-	{
-		...
-		"scripts": { ... },
-		"husky": {
-			"hooks": {
-				"pre-commit": "nx lint"
-			}
-		},
-		"private": "...",
-		...
-	}
-	```
+	  <details>
+			<summary>package.json</summary>
+
+		 {
+			 ...
+			 "scripts": { ... },
+			 "husky": {
+				 "hooks": {
+					"pre-commit": "nx lint"
+				 }
+			 },
+			 "private": "...",
+			 ...
+		 }
+	  </details>
 
 ## Commitlint
 
@@ -134,24 +144,27 @@
 1. Install [commitlint](https://yarnpkg.com/package/commitlint) only for development: `pnpm i -D @commitlint/{config-conventional,cli}`
 2. Install [@happ/commitlint-config]() only for development: `pnpm i -D @happ/commitlint-config`
 3. Create `.commitlintrc.js` in the root folder with:
+	   <details>
+	 		<summary>.commitlintrc.js</summary>
 
-	```
-	module.exports = {
-		"extends": ["@happ/commitlint-config"]
-	}
-	```
+		 module.exports = {
+			"extends": ["@happ/commitlint-config"]
+		 }
+	   </details>
 
 4. Update `package.json` with:
 
-	```
-	"husky": {
-		"hooks": {
-			...
-			"pre-commit": "nx lint",
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-		}
-	}
-	```
+	<details>
+		<summary>package.json</summary>
+
+		 "husky": {
+			 "hooks": {
+				 ...
+				 "pre-commit": "nx lint",
+				 "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+			 }
+		 }
+	</details>
 
 > Commit have to be like `feat: add auth service`, `fix: remove wrong validation`
 >
@@ -170,35 +183,41 @@
 4. Make your repo commitizen-friendly: `commitizen init cz-conventional-changelog --save-dev --save-exact`
 5. Create `.czrc` with:
 
-	```
-	{
-		"path": "cz-format-extension"
-	}
-	```
+	 <details>
+	 	<summary>.czrc</summary>
+	 
+		 {
+			"path": "cz-format-extension"
+		 }
+	 </details>
 
 6. Create `.czferc.js` with:
 
-	```
-	module.exports = {
-		extends: ['@happ/commitizen-config']
-	};
-	```
+	  <details>
+	  	<summary>.czferc.js</summary>
+	 
+		 module.exports = {
+			extends: ['@happ/commitizen-config']
+		 };
+	  </details>
 
 7. Update `package.json` with:
 
-	```
-	{
-		...
-		"scripts": {
+	   <details>
+	   	<summary>package.json</summary>
+	 
+		 {
 			...
-			"git-add": "git add .",
-			"git-commit": "cz",
-			"git-push": "git push",
-			"git": "pnpm run git-add && pnpm run git-commit && pnpm run git-push"
-		}
-		...
-	}
-	```
+			"scripts": {
+				...
+				"git-add": "git add .",
+				"git-commit": "cz",
+				"git-push": "git push",
+				"git": "pnpm run git-add && pnpm run git-commit && pnpm run git-push"
+			}
+			...
+		 }
+	   </details>
 
 ## Conventional changelog cli
 
@@ -208,17 +227,19 @@
 2. Init changelog: `conventional-changelog -p angular -i CHANGELOG.md -s -r 0`
 3. Update `package.json` with:
 
-	```
-	{
-		...
-		"scripts": {
+	<details>
+			<summary>package.json</summary>
+	 
+		 {
 			...
-			"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
-			"version": "pnpm run changelog"
-		}
-		...
-	}
-	```
+			"scripts": {
+				...
+				"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+				"version": "pnpm run changelog"
+			}
+			...
+		 }
+	</details>
 
 	> Use `pnpm version [major|minor|patch]` to change your project's version and generate changelog
 	>
@@ -239,40 +260,42 @@
 	 > Install it together: `pnpm i -D @happ/eslint-config @happ/eslint-config-typescript @happ/eslint-config-jest @happ/eslint-config-angular @happ/eslint-config-angular-template @happ/eslint-config-json @happ/eslint-config-markdown`
 9. Create `.eslintrc.js` with:
 
-	```
-	module.exports = {
-		"overrides": [
-			{
-				"files": ["*.js", "*.ts"],
-				"extends": ["@happ/eslint-config"]
-			},
-			{
-				"files": ["*.ts"],
-				"extends": ["@happ/eslint-config-typescript"]
-			},
-			{
-				"files": ["*.spec.js", "*.spec.ts"],
-				"extends": ["@happ/eslint-config-jest"]
-			},
-			{
-				"files": ["ANGULAR_DIRECTORY/*.ts"],
-				"extends": ["@happ/eslint-config-angular"]
-			},
-			{
-				"files": ["ANGULAR_DIRECTORY/*.html"],
-				"extends": ["@happ/eslint-config-angular-template"]
-			},
-			{
-				"files": ["*.json"],
-				"extends": ["@happ/eslint-config-json"]
-			},
-			{
-				"files": ["*.md"],
-				"extends": ["@happ/eslint-config-markdown"]
-			}
-		]
-	}
-	```
+	 <details>
+		<summary>.eslintrc.js</summary>
+	 
+		 module.exports = {
+			"overrides": [
+				{
+					"files": ["*.js", "*.ts"],
+					"extends": ["@happ/eslint-config"]
+				},
+				{
+					"files": ["*.ts"],
+					"extends": ["@happ/eslint-config-typescript"]
+				},
+				{
+					"files": ["*.spec.js", "*.spec.ts"],
+					"extends": ["@happ/eslint-config-jest"]
+				},
+				{
+					"files": ["ANGULAR_DIRECTORY/*.ts"],
+					"extends": ["@happ/eslint-config-angular"]
+				},
+				{
+					"files": ["ANGULAR_DIRECTORY/*.html"],
+					"extends": ["@happ/eslint-config-angular-template"]
+				},
+				{
+					"files": ["*.json"],
+					"extends": ["@happ/eslint-config-json"]
+				},
+				{
+					"files": ["*.md"],
+					"extends": ["@happ/eslint-config-markdown"]
+				}
+			]
+		 }
+	 </details>
 
 ## Prettier
 
@@ -282,11 +305,13 @@
 2. Install [@happ/prettier-config]() only for development: `pnpm i -D @happ/prettier-config`
 3. Create `.prettierrc.js` with:
 
-	```
-	module.exports = {
-		extends: ["@happ/prettier-config"]
-	}
-	```
+	<details>
+		<summary>.prettierrc.js</summary>
+ 
+		 module.exports = {
+			extends: ["@happ/prettier-config"]
+		 };
+	</details>
 
 ## Stylelint
 
@@ -296,11 +321,13 @@
 2. Install [@happ/stylelint-config]() only for development: `pnpm i -D @happ/stylelint-config`
 3. Create `.stylelintrc.js` with:
 
-	```
-	module.exports = {
-		extends: ["@happ/stylelint-config"]
-	}
-	```
+	<details>
+		<summary>.stylelintrc.js</summary>
+ 
+		 module.exports = {
+			extends: ["@happ/stylelint-config"]
+		 };
+	</details>
 
 ## Editor config
 
@@ -308,15 +335,18 @@
 
 1. Create `.editorconfig` with:
 
-	```
-	root = true
+	 <details>
+	 	<summary>.editorconfig</summary>
+
+		 root = true
 	
-	[*]
-	end_of_line = lf
-	insert_final_newline = true
-	indent_style = tab
-	indent_size = 2
-	```
+		 [*]
+		 end_of_line = lf
+		 insert_final_newline = true
+		 indent_style = tab
+		 indent_size = 2
+	 </details>
+
 
 > If you are using VS Code you have also install [plugin](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 

@@ -203,10 +203,10 @@
 
 7. Update `package.json` with:
 
-	   <details>
-	   	<summary>package.json</summary>
-	 
-		 {
+	<details>
+		<summary>package.json</summary>
+		
+		{
 			...
 			"scripts": {
 				...
@@ -216,8 +216,8 @@
 				"git": "pnpm run git-add && pnpm run git-commit && pnpm run git-push"
 			}
 			...
-		 }
-	   </details>
+		}
+	</details>
 
 ## Conventional changelog cli
 

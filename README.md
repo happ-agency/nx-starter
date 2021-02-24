@@ -24,11 +24,13 @@
 18. [Additional info](#additional-info)
 
 ## Pnpm
+> [pnpm](https://www.npmjs.com/package/pnpm) - package manager, which is much faster then npm and yarn
+
 1. Install a [pnpm](https://www.npmjs.com/package/pnpm) globally: `npm i -g pnpm`
 
-	> [pnpm](https://www.npmjs.com/package/pnpm) - package manager, which is much faster then npm and yarn
+## Nx workspaces
 
-## Nx Workspaces
+> [Nx workspace](https://nx.dev/latest/angular/getting-started/getting-started)
 
 1. Create a [nx workspace](https://nx.dev/): `pnpx create-nx-workspace WORKSPACE_NAME --preset=empty --no-nxCloud --package-manager=pnpm --defaultBase=main`
 
@@ -41,9 +43,9 @@
 	> 5. `--defaultBase=main` - default git branch
 
 ## Npm check
-1. Install a [npm-check](https://www.npmjs.com/package/npm-check) only for development: `pnpm i -D npm-check`
+> [npm-check](https://www.npmjs.com/package/npm-check) - package that check for outdated, incorrect, and unused dependencies.
 
-	> [npm-check](https://www.npmjs.com/package/npm-check) - package that check for outdated, incorrect, and unused dependencies.
+1. Install a [npm-check](https://www.npmjs.com/package/npm-check) only for development: `pnpm i -D npm-check`
 
 2. Update `package.json` with:
 
@@ -62,6 +64,8 @@
 	 </details>
 
 ## Force using pnpm
+
+> Force usign [pnpm](https://www.npmjs.com/package/pnpm) throw `please-use-pnpm` error on [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) use
 
 1. Create `.npmrc` in the root folder with:
 	 
@@ -88,8 +92,6 @@
 			...	
 		}
 	 </details>
-
-> Force usign [pnpm](https://www.npmjs.com/package/pnpm) throw `please-use-pnpm` error on [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) use
 
 ## Git
 

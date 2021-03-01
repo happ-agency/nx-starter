@@ -378,9 +378,10 @@
 
 ## Related projects:
 1. [nx-web-starter](https://github.com/happ-agency/nx-web-starter)
-2. [nx-nestjs-starter](https://github.com/happ-agency/nx-nestjs-starter)
-3. [nx-angular-starter](https://github.com/happ-agency/nx-angular-starter)
-4. [nx-angular-nestjs-starter](https://github.com/happ-agency/nx-angular-nestjs-starter)
+2. [nx-node-starter](https://github.com/happ-agency/nx-node-starter)
+3. [nx-nestjs-starter](https://github.com/happ-agency/nx-nestjs-starter)
+4. [nx-angular-starter](https://github.com/happ-agency/nx-angular-starter)
+5. [nx-angular-nestjs-starter](https://github.com/happ-agency/nx-angular-nestjs-starter)
 
 ## Additional info
 

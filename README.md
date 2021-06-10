@@ -32,7 +32,7 @@
 
 > [Nx workspace](https://nx.dev/latest/angular/getting-started/getting-started)
 
-1. Create a [nx workspace](https://nx.dev/): `pnpx create-nx-workspace WORKSPACE_NAME --preset=empty --no-nxCloud --package-manager=pnpm --defaultBase=main`
+1. Create a [nx workspace](https://nx.dev/) with pnpm: `pnpx create-nx-workspace WORKSPACE_NAME --preset=empty --no-nxCloud --package-manager=pnpm --defaultBase=main`
 
 	> [pnpx](https://pnpm.js.org/en/pnpx-cli) - pnpm package runner
 	
@@ -41,6 +41,8 @@
 	> 3. `--nxCloud` - use nx cloud or not
 	> 4. `--package-manager=pnpm` - default package manager
 	> 5. `--defaultBase=main` - default git branch
+
+2. With yarn: `yarn create nx-workspace godex --preset=empty --no-nxCloud --package-manager=yarn --defaultBase=main`
 
 ## Npm check
 > [npm-check](https://www.npmjs.com/package/npm-check) - package that check for outdated, incorrect, and unused dependencies.
